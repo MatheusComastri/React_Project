@@ -1,0 +1,199 @@
+/* ============================================= */
+/* CSS GLOBAL — Tema Claro e Escuro com variáveis */
+/* ============================================= */
+
+/* TEMA CLARO (padrão) — definido na raiz do documento */
+:root {
+  /* Cores de fundo */
+  --bg: #ffffff;
+  --bg-card: #f0f4ff;
+  --bg-header: #1a1a2e;
+  --bg-button: #4a90d9;
+
+  /* Cores de texto */
+  --text: #333333;
+  --text-header: #ffffff;
+  --text-card-title: #1a1a2e;
+  --text-button: #ffffff;
+
+  /* Cores de borda e destaque */
+  --border: #d1d5db;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* TEMA ESCURO — quando a classe "dark" está presente em um elemento pai */
+/* Isso permite que qualquer componente com classe "dark" ative o tema escuro */
+.dark {
+  --bg: #121212;
+  --bg-card: #1e1e2f;
+  --bg-header: #0d0d1a;
+  --bg-button: #6c63ff;
+
+  --text: #e0e0e0;
+  --text-header: #ffffff;
+  --text-card-title: #c4b5fd;
+  --text-button: #ffffff;
+
+  --border: #333355;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* Reset básico — remove margens e paddings padrão do navegador */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo do body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* transition cria uma animação suave ao trocar de tema */
+}
+
+/* A classe .app envolve toda a aplicação (está no App.jsx) */
+.app {
+  min-height: 100vh;
+  /* 100vh = 100% da altura da janela do navegador */
+  display: flex;
+  flex-direction: column;
+  /* Organiza os filhos em coluna (Header em cima, main abaixo) */
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================= */
+/* HEADER */
+/* ============================================= */
+.header {
+  background-color: var(--bg-header);
+  color: var(--text-header);
+  padding: 20px 40px;
+  /* Espaçamento interno: 20px em cima/baixo, 40px nas laterais */
+  display: flex;
+  /* Ativa o Flexbox para alinhar elementos lado a lado */
+  justify-content: space-between;
+  /* Título na esquerda, botão na direita */
+  align-items: center;
+  /* Alinha verticalmente ao centro */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* ============================================= */
+/* BOTÃO DE TEMA (ThemeButton) */
+/* ============================================= */
+.theme-button {
+  background-color: var(--bg-button);
+  color: var(--text-button);
+  border: none;
+  /* Remove a borda padrão do botão */
+  padding: 10px 20px;
+  border-radius: 8px;
+  /* Arredonda os cantos do botão */
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  /* Muda o cursor para "mãozinha" indicando que é clicável */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  /* Animação suave ao passar o mouse */
+}
+
+.theme-button:hover {
+  /* Efeito hover: quando o mouse passa por cima */
+  transform: scale(1.05);
+  /* Aumenta o botão ligeiramente (5%) */
+  opacity: 0.9;
+}
+
+/* ============================================= */
+/* CONTAINER PRINCIPAL */
+/* ============================================= */
+.container {
+  max-width: 900px;
+  width: 100%;
+  margin: 40px auto;
+  /* Centraliza horizontalmente com margem automática */
+  padding: 0 20px;
+  display: grid;
+  /* Usa CSS Grid para organizar os cards */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* Cria colunas responsivas: cada card tem no mínimo 280px */
+  gap: 24px;
+  /* Espaçamento entre os cards */
+}
+
+/* ============================================= */
+/* CARD */
+/* ============================================= */
+.card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  /* Cantos arredondados */
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  /* Efeito hover no card */
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+  /* Sobe o card 4px ao passar o mouse (efeito flutuante) */
+}
+
+.card h2 {
+  color: var(--text-card-title);
+  font-size: 20px;
+  margin-bottom: 12px;
+  /* Espaço abaixo do título */
+}
+
+.card p {
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  /* Altura da linha = 1.6x o tamanho da fonte (melhora legibilidade) */
+}
+
+/* ============================================= */
+/* RESPONSIVIDADE — adapta o layout em telas menores */
+/* ============================================= */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    /* Empilha título e botão verticalmente */
+    gap: 12px;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .container {
+    margin: 20px auto;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .theme-button {
+    width: 100%;
+    /* Botão ocupa toda a largura em telas pequenas */
+  }
+}
