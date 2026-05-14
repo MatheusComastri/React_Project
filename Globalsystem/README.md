@@ -1,16 +1,47 @@
-# React + Vite
+# 🌗 Context API App — Tema Claro/Escuro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto React desenvolvido para a faculdade, utilizando **Context API** para gerenciamento global de estado.
 
-Currently, two official plugins are available:
+## 🚀 Como iniciar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+# 1. Instalar as dependências
+npm install
 
-## React Compiler
+# 2. Rodar o servidor de desenvolvimento
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+O projeto abre em `http://localhost:5173`.
 
-## Expanding the ESLint configuration
+## 📦 O que o projeto tem
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Item | Descrição |
+|------|-----------|
+| **Context API** | Estado global `darkMode` compartilhado entre todos os componentes |
+| **Provider** | `ThemeProvider` encapsula a aplicação e disponibiliza o contexto |
+| **3 componentes consumindo** | `App`, `Header`, `Card` e `ThemeButton` usam `useTheme()` |
+| **Tema Claro/Escuro** | Botão no header alterna entre os dois temas |
+| **CSS com variáveis** | Tema usa `:root` (claro) e `.dark` (escuro) com `transition` suave |
+| **Responsivo** | Layout adaptável para telas menores |
+
+## 🧠 Como funciona
+
+1. `TheContext.jsx` cria o contexto com `createContext()` e exporta `ThemeProvider` + `useTheme`
+2. `main.jsx` envolve o `<App>` com `<ThemeProvider>`
+3. Qualquer componente chama `useTheme()` para acessar `darkMode` e `toggleTheme`
+4. O botão no header chama `toggleTheme()` e o CSS aplica as cores do tema automaticamente
+
+## 📁 Estrutura
+
+```
+src/
+├── main.jsx                  ← Entrada, renderiza com ThemeProvider
+├── App.jsx                   ← Componente principal
+├── Context/TheContext.jsx    ← Context API (createContext, Provider, hook)
+├── Components/
+│   ├── Header.jsx            ← Título + botão de tema
+│   ├── Card.jsx              ← Card reutilizável
+│   └── TheButton.jsx         ← Botão de alternar tema
+└── Styles/Global.css         ← CSS com tema claro ✨ escuro
+```
